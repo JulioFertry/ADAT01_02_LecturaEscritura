@@ -1,5 +1,3 @@
-package org.example
-
 import java.nio.file.Path
 
 fun main() {
