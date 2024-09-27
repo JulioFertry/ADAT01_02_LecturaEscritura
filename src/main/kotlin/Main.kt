@@ -10,17 +10,26 @@ fun main() {
     val root = Path.of("src")
     val csvFilePath = root.resolve("main").resolve("resources").resolve("calificaciones.csv")
 
-    // Lee el fichero y lo transforma a Lista
-    var info = reader.getSubjectInfo(csvFilePath)
+    try {
+        // Lee el fichero y lo transforma a Lista
+        var info = reader.getSubjectInfo(csvFilePath)
 
-    info = writer.addFinalGrades(info)
-    info.forEach { println(it) }
+        // Añade las notas finales a la lista y las muestra
+        info = writer.addFinalGrades(info)
+        info.forEach { println(it) }
 
-    val (passed, failed) = writer.createPassedLists(info)
+        // Crea las listas de aprobados y suspensos
+        val (passed, failed) = writer.createPassedLists(info)
 
-    println("Aprobados:")
-    passed.forEach { println(it) }
+        // Imprime la lista de los aprobados
+        println("Aprobados:")
+        passed.forEach { println(it) }
 
-    println("\nSuspensos:")
-    failed.forEach { println(it) }
+        // Imprime la lista de los suspensos
+        println("\nSuspensos:")
+        failed.forEach { println(it) }
+    } catch (e: Exception) {
+        println("***ERROR*** ${e.message}")
+    }
+
 }
